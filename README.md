@@ -8,9 +8,9 @@
 2. php抽象类反序列化
 3. 命令执行绕过
 
-- **描述：**
+- **描述：** 听说你是pop大师！
 
-- **flag：**
+- **flag：** flag{Y0u_Ar3_A_POP_Ma5ter!!!!}
 
 - **Writeup：** 
 
