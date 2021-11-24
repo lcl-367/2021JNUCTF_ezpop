@@ -14,10 +14,10 @@ class openfunc{
 }
 abstract class hack {
 
-    abstract protected function shell();
+    abstract protected function pass();
 
     public function action() {
-        $this->shell();
+        $this->pass();
     }
 }
 class normal{
@@ -27,11 +27,24 @@ class normal{
 }
 class evil extends hack{
     protected $data;
-    protected function shell(){
-        if(preg_match('/system|eval|exec|base|compress|chr|ord|str|replace|pack|assert|preg|replace|create|function|call|\~|\^|\`|flag|cat|tac|more|tail|echo|require|include|proc|open|read|shell|file|put|get|contents|dir|link|dl|var|dump/i',$this->data)){
+    protected $a;
+    protected $b; 
+    protected $c;
+    protected function pass(){
+        $this->a = unserialize($this->b);
+        $this->a->d = $this->c;
+        if($this->a->d === $this->a->e){
+           $this->shell();
+        }
+        else{
+            die('no no no');
+        }
+    }
+    function shell(){
+        if(preg_match('/system|eval|exec|base|compress|chr|ord|str|replace|pack|assert|preg|replace|create|function|call|\~|\^|\`|flag|cat|tac|more|tail|echo|require|include|proc|open|read|shell|file|put|get|contents|dir|link|dl|var|dump|php/i',$this->data)){
             die("you die");
-           }
-        $dir = 'sandbox/' . md5($_SERVER['REMOTE_ADDR']) . '/';
+        }
+        $dir = 'scandbox/' . md5($_SERVER['REMOTE_ADDR']) . '/';
         if(!file_exists($dir)){
             mkdir($dir);
             echo $dir;
@@ -42,7 +55,7 @@ class evil extends hack{
 
 if (isset($_GET['Xp0int']))  
 {
-    $logData = unserialize($_GET['Xp0int']);
+    $Data = unserialize($_GET['Xp0int']);
 } 
 else 
 { 
