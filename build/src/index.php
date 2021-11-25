@@ -1,7 +1,7 @@
 <?php
 error_reporting(0);
 class openfunc{
-    protected $object;
+    public $object;
     function __construct(){
         $this->object=new normal();
     }
@@ -14,37 +14,38 @@ class openfunc{
 }
 abstract class hack {
 
-    abstract protected function pass();
+    abstract public function pass();
 
     public function action() {
         $this->pass();
     }
 }
 class normal{
+    public $d;
     function action(){
         echo "you must bypass it";
     }
 }
 class evil extends hack{
-    protected $data;
-    protected $a;
-    protected $b; 
-    protected $c;
-    protected function pass(){
+    public $data;
+    public $a;
+    public $b; 
+    public $c;
+    public function pass(){
         $this->a = unserialize($this->b);
-        $this->a->d = $this->c;
-        if($this->a->d === $this->a->e){
+        $this->a->d = urldecode(date($this->c));
+        if($this->a->d === 'shell'){
            $this->shell();
         }
         else{
-            die('no no no');
+            die(date('Y/m/d H:i:s'));
         }
     }
     function shell(){
         if(preg_match('/system|eval|exec|base|compress|chr|ord|str|replace|pack|assert|preg|replace|create|function|call|\~|\^|\`|flag|cat|tac|more|tail|echo|require|include|proc|open|read|shell|file|put|get|contents|dir|link|dl|var|dump|php/i',$this->data)){
             die("you die");
         }
-        $dir = 'scandbox/' . md5($_SERVER['REMOTE_ADDR']) . '/';
+        $dir = 'sandbox/' . md5($_SERVER['REMOTE_ADDR']) . '/';
         if(!file_exists($dir)){
             mkdir($dir);
             echo $dir;
@@ -55,7 +56,7 @@ class evil extends hack{
 
 if (isset($_GET['Xp0int']))  
 {
-    $Data = unserialize($_GET['Xp0int']);
+    $Data = unserialize(base64_decode($_GET['Xp0int']));
 } 
 else 
 { 
